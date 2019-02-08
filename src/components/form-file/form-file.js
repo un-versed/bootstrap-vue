@@ -74,13 +74,19 @@ export default {
       // Multiple files
       if (this.multiple) {
         if (this.selectedFile.length === 1) {
-          return this.selectedFile[0].name
+          return ((this.selectedFile[0].name.length >= 40)
+            ? this.selectedFile[0].name.substr(0, 40) + '...'
+            : this.selectedFile[0].name)
         }
-        return this.selectedFile.map(file => file.name).join(', ')
+        return ((this.selectedFile.map(file => file.name).join(', ').length >= 40)
+          ? (this.selectedFile.map(file => file.name).join(', ')).substr(0, 40) + '...'
+          : this.selectedFile.map(file => file.name).join(', '))
       }
 
       // Single file
-      return this.selectedFile.name
+      return ((this.selectedFile.name.length >= 40)
+            ? this.selectedFile.name.substr(0, 40) + '...'
+            : this.selectedFile.name)
     }
   },
   watch: {
